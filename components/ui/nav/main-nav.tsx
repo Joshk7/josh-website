@@ -8,7 +8,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
+} from "@/components/ui/nav/navigation-menu";
 
 import Link from "next/link";
 
@@ -16,15 +16,15 @@ const MainNav = () => {
   return (
     <NavigationMenu className="h-16 min-w-full bg-blue-900 z-0 flex items-center justify-end lg:justify-center">
       <NavigationMenuList>
-        <NavigationMenuItem className="px-4 hidden lg:flex">
+        <NavigationMenuItem className="hidden lg:flex">
           <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              About Me
+              Home
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className="px-4 hidden lg:flex">
+        <NavigationMenuItem className="px-2 hidden lg:flex">
           <Link href="resume" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Resume
@@ -32,7 +32,7 @@ const MainNav = () => {
           </Link>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className="px-4 hidden lg:flex">
+        <NavigationMenuItem className="px-2 hidden lg:flex">
           <Link href="projects" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Projects
@@ -40,10 +40,10 @@ const MainNav = () => {
           </Link>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className="px-4 hidden lg:flex">
+        <NavigationMenuItem className="px-2 hidden lg:flex">
           <Link href="hobbies" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Hobbies
+              About
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
@@ -53,7 +53,7 @@ const MainNav = () => {
           <NavigationMenuContent className="flex justify-center items-center">
             <Link href="/" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                About Me
+                Home
                 </NavigationMenuLink>
             </Link>
             <Link href="/resume" legacyBehavior passHref>
@@ -68,7 +68,7 @@ const MainNav = () => {
             </Link>
             <Link href="/hobbies" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Hobbies
+                About
                 </NavigationMenuLink>
             </Link>
           </NavigationMenuContent>

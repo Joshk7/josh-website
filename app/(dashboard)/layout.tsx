@@ -1,6 +1,6 @@
 "use client";
 
-import MainNav from "@/components/ui/main-nav";
+import MainNav from "@/components/ui/nav/main-nav";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

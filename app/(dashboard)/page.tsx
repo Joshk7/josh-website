@@ -5,13 +5,13 @@ import Link from "next/link";
 
 const AboutMe = () => {
   return (
-    <div className="bg-blue-50 w-full h-full flex justify-start">
-      <div className="flex flex-col md:flex-row justify-center items-center space-x-4 p-4">
+    <div className="w-full flex justify-start">
+      <div className="flex flex-col md:flex-row justify-center items-center space-x-4 pt-20 p-4">
         <Image
           src="/me3.jpg"
           alt="me"
           width={200}
-          height={200}
+          height={300}
           className="rounded-sm md:w-[300px]"
         />
         <div className="flex flex-col justify-center items-center">

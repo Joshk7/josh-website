@@ -23,6 +23,7 @@ function Game() {
     Math.random() < 0.5 ? "HUMAN" : "BOT"
   );
   const [isHumanMaximizing, setIsHumanMaximizing] = useState<boolean>(true);
+  const [isPossible, setIsPossible] = useState<boolean>(false);
   const [gamesCount, setGamesCount] = useState({
     wins: 0,
     losses: 0,
@@ -86,7 +87,7 @@ function Game() {
             squares,
             !isHumanMaximizing,
             0,
-            parseInt("-1")
+            !isPossible ? parseInt("-1") : parseInt("2")
           );
           insertCell(best, isHumanMaximizing ? "o" : "x");
           setTurn("HUMAN");
@@ -102,13 +103,13 @@ function Game() {
 
   const winner = isTerminal(squares);
 
-  //   console.log(winner);
+    // console.log(isPossible);
 
   return (
     <div className="flex flex-col justify-center items-center p-20">
       <div className="flex flex-col items-center">
-        <button className="text-white p-4 rounded-full bg-blue-900 font-bold text-lg text-center mb-4">
-          Difficulty: Impossible
+        <button onClick={() => {setIsPossible(!isPossible)}} className="text-white p-4 rounded-full bg-blue-900 font-bold text-lg text-center mb-4">
+          Difficulty: {!isPossible ? "Impossible" : "Possible"}
         </button>
         <div className="flex flex-row mb-10">
           <div className="flex flex-col bg-white border border-blue-900 items-center p-2 mx-2">

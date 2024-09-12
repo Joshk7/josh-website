@@ -16,24 +16,26 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const Resume = () => {
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <div className="max-h-full z-0 absolute">
-        <HoverCard openDelay={50} closeDelay={200}>
-          <HoverCardTrigger>
-            <Document file="/JoshKahlbaughResume.pdf">
-              <Page className="mt-16" pageNumber={1} scale={0.95} />
-            </Document>
-          </HoverCardTrigger>
-          <a href="/JoshKahlbaughResume.pdf" download>
-            <HoverCardContent
-              sideOffset={4}
-              className="flex w-32 rounded-full border-none h-14 items-center shadow-none bg-blue-900 text-white justify-center"
-            >
-              Download
-            </HoverCardContent>
-          </a>
-        </HoverCard>
-      </div>
+    <div className="w-full h-full relative justify-center items-center">
+        <div className="relative lg:top-16">
+            <div className="flex top-12 justify-center items-center">
+                <HoverCard openDelay={50} closeDelay={200}>
+                <HoverCardTrigger>
+                    <Document file="/JoshKahlbaughResume.pdf">
+                    <Page className="" pageNumber={1} scale={0.9} />
+                    </Document>
+                </HoverCardTrigger>
+                <a href="/JoshKahlbaughResume.pdf" download>
+                    <HoverCardContent
+                    sideOffset={8}
+                    className="flex w-32 h-12 rounded-full border-none items-center font-bold shadow-none bg-white text-blue-900 justify-center"
+                    >
+                    Download
+                    </HoverCardContent>
+                </a>
+                </HoverCard>
+            </div>
+        </div>
     </div>
   );
 };

@@ -21,12 +21,15 @@ const Board = ({
     <div className="flex flex-row flex-wrap w-60 h-60">
       {state.map((cell, index) => {
         return (
-          <Square
-            disabled={cell !== null || disabled}
-            onPress={() => onCellPressed && onCellPressed(index)}
-            key={index}
-            value={cell}
-          />
+            <React.Fragment key={index + "-board"}>
+                <Square
+                  disabled={cell !== null || disabled}
+                  onPress={() => onCellPressed && onCellPressed(index)}
+                  index={index}
+                  key={index}
+                  value={cell}
+                />
+            </React.Fragment>
         );
       })}
     </div>

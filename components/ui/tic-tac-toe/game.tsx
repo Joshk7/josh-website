@@ -7,7 +7,17 @@ import { BoardState, Cell } from "./utils/types";
 import { getBestMove } from "./utils/player";
 
 function Game() {
-  const [squares, setSquares] = useState<BoardState>([
+  const [turn, _setTurn] = useState<"HUMAN" | "BOT">(
+    Math.random() < 0.5 ? "HUMAN" : "BOT"
+  );
+
+  const setTurn = (_turn: "HUMAN" | "BOT", _squares: BoardState) => {
+    // console.log(_turn);
+    _setTurn(_turn);
+    playGame(_turn, _squares);
+  };
+
+  const [squares, _setSquares] = useState<BoardState>([
     null,
     null,
     null,
@@ -19,9 +29,11 @@ function Game() {
     null,
   ]);
 
-  const [turn, setTurn] = useState<"HUMAN" | "BOT">(
-    Math.random() < 0.5 ? "HUMAN" : "BOT"
-  );
+  const setSquares = (state: BoardState) => {
+    _setSquares(state);
+    determineWinner(state);
+  };
+
   const [isHumanMaximizing, setIsHumanMaximizing] = useState<boolean>(true);
   const [isPossible, setIsPossible] = useState<boolean>(false);
   const [gamesCount, setGamesCount] = useState({
@@ -30,22 +42,73 @@ function Game() {
     draws: 0,
   });
 
-  const gameResult = isTerminal(squares);
+  const [gameResult, setGameResult] = useState(isTerminal(squares));
 
-  const insertCell = (index: number, symbol: "x" | "o") => {
-    if (squares[index] || isTerminal(squares)) return;
+  const determineWinner = (squaresState: BoardState) => {
+    const gResult = isTerminal(squaresState);
+    if (!gResult) {
+      return;
+    }
+    const winner = getWinner(gResult.winner);
+    if (winner === "HUMAN") {
+      setGamesCount({ ...gamesCount, wins: gamesCount.wins + 1 });
+    }
+    if (winner === "BOT") {
+      setGamesCount({ ...gamesCount, losses: gamesCount.losses + 1 });
+    }
 
-    const newSquares: BoardState = [...squares];
+    if (winner === "DRAW") {
+      setGamesCount({ ...gamesCount, draws: gamesCount.draws + 1 });
+    }
+  };
+
+  const playGame = (_turn: "HUMAN" | "BOT", _squares: BoardState) => {
+    if (_turn !== "BOT") {
+      return;
+    }
+    if (isEmpty(_squares)) {
+      const centerAndCorners = [0, 2, 6, 8, 4];
+      const firstMove =
+        centerAndCorners[Math.floor(Math.random() * centerAndCorners.length)];
+      const newSquares = insertCell(firstMove, "x", _squares);
+      setIsHumanMaximizing(false);
+      setTurn("HUMAN", newSquares);
+      setSquares(newSquares);
+    } else {
+      const best = getBestMove(
+        _squares,
+        !isHumanMaximizing,
+        0,
+        !isPossible ? parseInt("-1") : parseInt("2")
+      );
+      const newSquares = insertCell(
+        best,
+        isHumanMaximizing ? "o" : "x",
+        _squares
+      );
+      setTurn("HUMAN", newSquares);
+      setSquares(newSquares);
+    }
+  };
+
+  const  insertCell = (
+    index: number,
+    symbol: "x" | "o",
+    curSquares: BoardState
+  ) => {
+    if (curSquares[index] || isTerminal(curSquares)) return curSquares;
+
+    const newSquares: BoardState = [...curSquares];
     newSquares[index] = symbol;
-    setSquares(newSquares);
+    return newSquares;
   };
 
   const handleOnSquarePressed = (square: number) => {
     if (turn !== "HUMAN") {
       return;
     }
-    insertCell(square, isHumanMaximizing ? "x" : "o");
-    setTurn("BOT");
+    const _squares = insertCell(square, isHumanMaximizing ? "x" : "o", squares);
+    setTurn("BOT", _squares);
   };
 
   const getWinner = (winnerSymbol: Cell): "HUMAN" | "BOT" | "DRAW" => {
@@ -59,56 +122,78 @@ function Game() {
   };
 
   useEffect(() => {
-    if (gameResult) {
-      const winner = getWinner(gameResult.winner);
-      if (winner === "HUMAN") {
-        setGamesCount({ ...gamesCount, wins: gamesCount.wins + 1 });
-      }
-      if (winner === "BOT") {
-        setGamesCount({ ...gamesCount, losses: gamesCount.losses + 1 });
-      }
-
-      if (winner === "DRAW") {
-        setGamesCount({ ...gamesCount, draws: gamesCount.draws + 1 });
-      }
-    } else {
-      if (turn === "BOT") {
-        if (isEmpty(squares)) {
-          const centerAndCorners = [0, 2, 6, 8, 4];
-          const firstMove =
-            centerAndCorners[
-              Math.floor(Math.random() * centerAndCorners.length)
-            ];
-          insertCell(firstMove, "x");
-          setIsHumanMaximizing(false);
-          setTurn("HUMAN");
-        } else {
-          const best = getBestMove(
-            squares,
-            !isHumanMaximizing,
-            0,
-            !isPossible ? parseInt("-1") : parseInt("2")
-          );
-          insertCell(best, isHumanMaximizing ? "o" : "x");
-          setTurn("HUMAN");
-        }
-      }
+    if (turn === "BOT") {
+        playGame(turn, squares);
     }
-  }, [squares, turn]);
+  },[])
+
+  //   useEffect(() => {
+  //     if (gameResult) {
+  //       const winner = getWinner(gameResult.winner);
+  //       if (winner === "HUMAN") {
+  //         setGamesCount({ ...gamesCount, wins: gamesCount.wins + 1 });
+  //       }
+  //       if (winner === "BOT") {
+  //         setGamesCount({ ...gamesCount, losses: gamesCount.losses + 1 });
+  //       }
+
+  //       if (winner === "DRAW") {
+  //         setGamesCount({ ...gamesCount, draws: gamesCount.draws + 1 });
+  //       }
+  //     } else {
+  //       if (turn === "BOT") {
+  //         if (isEmpty(squares)) {
+  //           const centerAndCorners = [0, 2, 6, 8, 4];
+  //           const firstMove =
+  //             centerAndCorners[
+  //               Math.floor(Math.random() * centerAndCorners.length)
+  //             ];
+  //           insertCell(firstMove, "x");
+  //           setIsHumanMaximizing(false);
+  //           setTurn("HUMAN");
+  //         } else {
+  //           const best = getBestMove(
+  //             squares,
+  //             !isHumanMaximizing,
+  //             0,
+  //             !isPossible ? parseInt("-1") : parseInt("2")
+  //           );
+  //           insertCell(best, isHumanMaximizing ? "o" : "x");
+  //           setTurn("HUMAN");
+  //         }
+  //       }
+  //     }
+  //   }, [squares, turn]);
 
   const reset = () => {
-    setSquares([null, null, null, null, null, null, null, null, null]);
-    setTurn(Math.random() < 0.5 ? "HUMAN" : "BOT");
+    const newSquares: BoardState = [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    ];
+    setSquares(newSquares);
+    setTurn(Math.random() < 0.5 ? "HUMAN" : "BOT", newSquares);
   };
 
   const winner = isTerminal(squares);
 
-    // console.log(isPossible);
+  // console.log(isPossible);
 
   return (
     <div className="flex flex-col justify-center items-center p-20">
       <div className="flex flex-col items-center">
-        <button onClick={() => {setIsPossible(!isPossible)}} className="text-white p-4 rounded-full bg-blue-900 font-bold text-lg text-center mb-4">
+        <button
+          onClick={() => {
+            setIsPossible(!isPossible);
+          }}
+          className="text-white p-4 rounded-full bg-blue-900 font-bold text-lg text-center mb-4"
+        >
           Difficulty: {!isPossible ? "Impossible" : "Possible"}
         </button>
         <div className="flex flex-row mb-10">

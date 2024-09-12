@@ -9,12 +9,13 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/nav/navigation-menu";
+import { Menu } from "lucide-react";
 
 import Link from "next/link";
 
 const MainNav = () => {
   return (
-    <NavigationMenu className="h-16 min-w-full bg-blue-900 z-0 flex items-center justify-end lg:justify-center">
+    <NavigationMenu className="h-16 min-w-full relative z-10 bg-blue-900 flex items-center justify-end lg:justify-center">
       <NavigationMenuList>
         <NavigationMenuItem className="hidden lg:flex">
           <Link href="/" legacyBehavior passHref>
@@ -48,28 +49,30 @@ const MainNav = () => {
           </Link>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className="flex pr-4 lg:hidden">
-          <NavigationMenuTrigger className={navigationMenuTriggerStyle()}>More about me!</NavigationMenuTrigger>
-          <NavigationMenuContent className="flex justify-center items-center">
+        <NavigationMenuItem className="relative pr-4 lg:hidden">
+          <NavigationMenuTrigger className={navigationMenuTriggerStyle()}>
+            <Menu size={32} />
+          </NavigationMenuTrigger>
+          <NavigationMenuContent className="relative justify-center items-center">
             <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Home
-                </NavigationMenuLink>
+              </NavigationMenuLink>
             </Link>
             <Link href="/resume" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Resume
-                </NavigationMenuLink>
+              </NavigationMenuLink>
             </Link>
             <Link href="/projects" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Projects
-                </NavigationMenuLink>
+              </NavigationMenuLink>
             </Link>
             <Link href="/hobbies" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 About
-                </NavigationMenuLink>
+              </NavigationMenuLink>
             </Link>
           </NavigationMenuContent>
         </NavigationMenuItem>

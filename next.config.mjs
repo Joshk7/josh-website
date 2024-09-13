@@ -5,8 +5,8 @@ const nextConfig = {
 
   //     return config;
   //   },
-//   output: "export",
-    swcMinify: false,
+  output: "export",
+  swcMinify: false,
 };
 
 export default nextConfig;

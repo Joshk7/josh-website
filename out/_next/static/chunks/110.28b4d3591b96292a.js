@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[110],{5110:function(e,s,a){a.r(s);var u=a(7437),l=a(7245),c=a(2067);a(2265),s.default=()=>(0,u.jsx)(l.Z,{file:"/JoshKahlbaughResume.pdf",children:(0,u.jsx)(c.Z,{className:"",pageNumber:1,scale:.9})})}}]);

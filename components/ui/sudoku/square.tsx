@@ -7,6 +7,7 @@ interface SquareProps {
   handleKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
   index: number;
   value: Cell;
+  valid: boolean;
   boxNumber?: number;
   focusIndex?: number;
   focusValue?: Cell;
@@ -17,6 +18,7 @@ const Square = ({
   onPress,
   index,
   value,
+  valid,
   focusIndex,
   handleKeyDown,
   focusValue,
@@ -42,9 +44,27 @@ const Square = ({
         focusIndex !== undefined &&
           Math.floor(focusIndex / 9) === Math.floor(index / 9) &&
           "bg-blue-100",
-          focusValue !== null && focusValue === value && "bg-blue-300",
-          focusIndex !== undefined && focusIndex === index && "bg-blue-200 border-2 border-blue-600 rounded-sm ",
+        focusValue !== null && focusValue === value && "bg-blue-300",
+        focusIndex !== undefined &&
+          getBoxNumber(focusIndex) === getBoxNumber(index) &&
+          focusValue === value &&
+          value !== null &&
+          "bg-red-200",
+        focusIndex !== undefined &&
+          focusIndex % 9 === index % 9 &&
+          focusValue === value &&
+          value !== null &&
+          "bg-red-200",
+        focusIndex !== undefined &&
+          Math.floor(focusIndex / 9) === Math.floor(index / 9) &&
+          focusValue === value &&
+          value !== null &&
+          "bg-red-200",
+        focusIndex !== undefined &&
+          focusIndex === index &&
+          "bg-blue-200 border-2 border-blue-600 rounded-sm",
         permanentValue === null && "text-blue-400",
+        !valid && "text-red-700",
       )}
       onClick={onPress}
       onKeyDown={handleKeyDown}

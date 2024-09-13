@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[646],{1615:function(e,n,s){Promise.resolve().then(s.bind(s,4452))},4452:function(e,n,s){"use strict";s.r(n);var t=s(7437);n.default=()=>(0,t.jsx)("div",{className:"w-full h-full flex justify-center items-center",children:"Hobbies page"})}},function(e){e.O(0,[971,23,744],function(){return e(e.s=1615)}),_N_E=e.O()}]);

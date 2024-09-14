@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const AboutMe = () => {
   return (
-    <div className="w-full flex justify-start">
+    <div className="w-full flex justify-center items-center">
       <div className="flex flex-col md:flex-row justify-center items-center space-x-4 pt-20 p-4">
         <Image
           src="/me3.jpg"

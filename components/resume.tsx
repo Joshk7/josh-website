@@ -8,11 +8,13 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url
 ).toString();
 
+const screenWidth = screen.width;
+
 const Resume = () => {
 
   return (
     <Document file="/JoshKahlbaughResume.pdf">
-      <Page className="" pageNumber={1} scale={0.9} />
+      <Page pageNumber={1} scale={screenWidth >= 320 ? 0.9 : 0.8} />
     </Document>
   );
 };

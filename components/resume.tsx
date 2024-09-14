@@ -14,7 +14,7 @@ const Resume = () => {
 
   return (
     <Document file="/JoshKahlbaughResume.pdf">
-      <Page pageNumber={1} scale={screenWidth >= 320 ? 0.9 : 0.8} />
+      <Page pageNumber={1} scale={screenWidth >= 320 ? 0.9 : 0.6} />
     </Document>
   );
 };

@@ -1,20 +1,22 @@
 "use client";
 
 import { Document, Page, pdfjs } from "react-pdf";
-import React from "react";
+import React, { useState } from "react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
   import.meta.url
 ).toString();
 
-const screenWidth = screen.width;
 
 const Resume = () => {
+    const screenWidth = window.innerWidth;
 
+    const scale = screenWidth / 1000;
+    
   return (
     <Document file="/JoshKahlbaughResume.pdf">
-      <Page pageNumber={1} scale={screenWidth >= 320 ? 0.9 : 0.5} />
+      <Page pageNumber={1} scale={scale} />
     </Document>
   );
 };

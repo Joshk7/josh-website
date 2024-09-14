@@ -172,17 +172,18 @@ const SudokuGame = () => {
   const keypad: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 p-20">
+    <div className="flex flex-col items-center justify-center p-20">
+      <div className="flex flex-col items-center justify-center space-y-4">
+
       
-      <div className="flex flex-col items-start justify-center">
-        <div className="flex flex-row w-full justify-center items-center mb-4">
-          <h1 className="text-blue-900 mr-1">Difficulty:</h1>
+        <div className="flex flex-row w-full justify-center items-center space-x-1">
+          <h1 className="text-blue-900 p-2">Difficulty:</h1>
           <button
             onClick={() => {
               setDifficultyLevel("easy");
             }}
             className={cn(
-              "bg-white p-2 rounded-sm mx-1 text-blue-300 hover:bg-blue-900 hover:text-white",
+              "bg-white p-2 rounded-sm text-blue-300 hover:bg-blue-900 hover:text-white",
               difficultyLevel === "easy" && "bg-blue-900 text-white"
             )}
           >
@@ -193,7 +194,7 @@ const SudokuGame = () => {
               setDifficultyLevel("medium");
             }}
             className={cn(
-              "bg-white p-2 rounded-sm mx-1 text-blue-300 hover:bg-blue-900 hover:text-white",
+              "bg-white p-2 rounded-sm text-blue-300 hover:bg-blue-900 hover:text-white",
               difficultyLevel === "medium" && "bg-blue-900 text-white"
             )}
           >
@@ -204,7 +205,7 @@ const SudokuGame = () => {
               setDifficultyLevel("hard");
             }}
             className={cn(
-              "bg-white p-2 rounded-sm mx-1 text-blue-300 hover:bg-blue-900 hover:text-white",
+              "bg-white p-2 rounded-sm text-blue-300 hover:bg-blue-900 hover:text-white",
               difficultyLevel === "hard" && "bg-blue-900 text-white"
             )}
           >
@@ -215,7 +216,7 @@ const SudokuGame = () => {
               setDifficultyLevel("expert");
             }}
             className={cn(
-              "bg-white p-2 rounded-sm mx-1 text-blue-300 hover:bg-blue-900 hover:text-white",
+              "bg-white p-2 rounded-sm text-blue-300 hover:bg-blue-900 hover:text-white",
               difficultyLevel === "expert" && "bg-blue-900 text-white"
             )}
           >
@@ -232,30 +233,28 @@ const SudokuGame = () => {
           onCellPressed={(cell) => handleOnCellPressed(cell)}
           permanent={permanent}
         />
-      </div>
 
-      <div className="flex flex-col w-[272pt] h-full items-center">
-        <div className="flex w-full h-full flex-row items-center space-x-10 justify-center">
-          <div className="flex flex-col space-y-2 items-center">
-            <button>
-              <RotateCcw
-                size={48}
-                className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
-              />
-            </button>
-            <h1 className="text-sm text-blue-900">Undo</h1>
-          </div>
+            <div className="w-[272pt] space-x-12 justify-center flex flex-row">
+                <div className="flex flex-col space-y-2 items-center">
+                    <button>
+                    <RotateCcw
+                        size={48}
+                        className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
+                    />
+                    </button>
+                    {/* <h1 className="text-sm text-blue-900">Undo</h1> */}
+                </div>
 
-          <div className="flex flex-col space-y-2 items-center">
-            <button>
-              <Eraser
-                size={48}
-                className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
-              />
-            </button>
-            <h1 className="text-sm text-blue-900">Erase</h1>
-          </div>
-        </div>
+                <div className="flex flex-col space-y-2 items-center">
+                    <button>
+                    <Eraser
+                        size={48}
+                        className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
+                    />
+                    </button>
+                    {/* <h1 className="text-sm text-blue-900">Erase</h1> */}
+                </div>
+            </div>
 
         <div className="flex flex-wrap items-center justify-center h-[225pt] w-[225pt]">
           {keypad.map((value) => (
@@ -264,7 +263,7 @@ const SudokuGame = () => {
             </button>
           ))}
         </div>
-      </div>
+        </div>
     </div>
   );
 };

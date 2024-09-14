@@ -48,17 +48,17 @@ const Square = ({
         focusIndex !== undefined &&
           getBoxNumber(focusIndex) === getBoxNumber(index) &&
           focusValue === value &&
-          value !== null &&
+          value &&
           "bg-red-200",
         focusIndex !== undefined &&
           focusIndex % 9 === index % 9 &&
           focusValue === value &&
-          value !== null &&
+          value &&
           "bg-red-200",
         focusIndex !== undefined &&
           Math.floor(focusIndex / 9) === Math.floor(index / 9) &&
           focusValue === value &&
-          value !== null &&
+          value &&
           "bg-red-200",
         focusIndex !== undefined &&
           focusIndex === index &&

@@ -7,6 +7,7 @@ import { boardArray, getBoxNumber } from "./utils/board";
 import Keypad from "@/components/ui/sudoku/keypad";
 import { Difficulty } from "sudoku-gen/dist/types/difficulty.type";
 import { cn } from "@/lib/utils";
+import { Eraser, RotateCcw } from "lucide-react";
 
 const SudokuGame = () => {
   const [difficultyLevel, _setDifficultyLevel] = useState<Difficulty>("easy");
@@ -16,26 +17,28 @@ const SudokuGame = () => {
     const _sudoku = getSudoku(difficulty);
     setSudoku(_sudoku);
     setBoard([...boardArray(_sudoku.puzzle)], null);
+    setFocusIndex(undefined);
   };
 
   const [sudoku, setSudoku] = useState<Sudoku>(getSudoku(difficultyLevel));
-  const permanent = boardArray(sudoku.puzzle);
-  const solved: BoardState = boardArray(sudoku.solution);
+  const permanent: BoardState = boardArray(sudoku.puzzle);
 
-  const [board, _setBoard] = useState<BoardState>([...permanent]);
+  const solved: BoardState = boardArray(sudoku.solution);
+  const seedState: BoardState = [...permanent];
+
+  const [board, _setBoard] = useState<BoardState>(seedState);
 
   const setBoard = (state: BoardState, value: Cell) => {
-    console.log(state);
     setFocusValue(value);
     _setBoard(state);
   };
 
-  //   const [permanent, setPermanent] = useState<BoardState>(puzzleArray);
-
   const [focusIndex, _setFocusIndex] = useState<number | undefined>(undefined);
 
-  const setFocusIndex = (index: number) => {
-    setFocusValue(board[index]);
+  const setFocusIndex = (index: number | undefined) => {
+    if (index !== null && index !== undefined) {
+      setFocusValue(board[index]);
+    }
     _setFocusIndex(index);
   };
 
@@ -44,10 +47,6 @@ const SudokuGame = () => {
   const setFocusValue = (value: Cell) => {
     _setFocusValue(value);
   };
-
-  //   console.log(board);
-  //   console.log(difficultyLevel);
-  //   console.log(solved);
 
   const handleOnCellPressed = (index: number) => {
     setFocusIndex(index);
@@ -68,7 +67,7 @@ const SudokuGame = () => {
     event: React.KeyboardEvent<HTMLButtonElement>,
     index: number
   ) => {
-    if (board?.[index]) {
+    if (permanent?.[index]) {
       return;
     }
     event.preventDefault();
@@ -170,8 +169,11 @@ const SudokuGame = () => {
     setBoard(_board, val);
   };
 
+  const keypad: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
   return (
-    <div className="flex flex-col items-center justify-center p-20">
+    <div className="flex flex-col items-center justify-center space-y-4 p-20">
+      
       <div className="flex flex-col items-start justify-center">
         <div className="flex flex-row w-full justify-center items-center mb-4">
           <h1 className="text-blue-900 mr-1">Difficulty:</h1>
@@ -230,6 +232,38 @@ const SudokuGame = () => {
           onCellPressed={(cell) => handleOnCellPressed(cell)}
           permanent={permanent}
         />
+      </div>
+
+      <div className="flex flex-col w-[272pt] h-full items-center">
+        <div className="flex w-full h-full flex-row items-center space-x-10 justify-center">
+          <div className="flex flex-col space-y-2 items-center">
+            <button>
+              <RotateCcw
+                size={48}
+                className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
+              />
+            </button>
+            <h1 className="text-sm text-blue-900">Undo</h1>
+          </div>
+
+          <div className="flex flex-col space-y-2 items-center">
+            <button>
+              <Eraser
+                size={48}
+                className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
+              />
+            </button>
+            <h1 className="text-sm text-blue-900">Erase</h1>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center h-[225pt] w-[225pt]">
+          {keypad.map((value) => (
+            <button className="w-[65pt] h-[65pt] bg-white text-blue-300 mx-1 rounded-md hover:bg-blue-900 hover:text-white">
+              <h1 className="">{value}</h1>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

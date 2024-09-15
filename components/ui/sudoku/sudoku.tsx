@@ -9,6 +9,11 @@ import { Difficulty } from "sudoku-gen/dist/types/difficulty.type";
 import { cn } from "@/lib/utils";
 import { Eraser, RotateCcw } from "lucide-react";
 
+interface HistoryEntry {
+    boardState: BoardState;
+    index?: number;
+}
+
 const SudokuGame = () => {
   const [difficultyLevel, _setDifficultyLevel] = useState<Difficulty>("easy");
 
@@ -22,11 +27,20 @@ const SudokuGame = () => {
 
   const [sudoku, setSudoku] = useState<Sudoku>(getSudoku(difficultyLevel));
   const permanent: BoardState = boardArray(sudoku.puzzle);
-
   const solved: BoardState = boardArray(sudoku.solution);
-  const seedState: BoardState = [...permanent];
 
-  const [board, _setBoard] = useState<BoardState>(seedState);
+  const initialBoard: BoardState = [...permanent];
+  const [board, _setBoard] = useState<BoardState>(initialBoard);
+  const [history, setHistory] = useState<HistoryEntry[]>([{boardState: initialBoard}]);
+
+
+  const [step, _setStep] = useState<number>(0);
+
+  const setStep = (_step: number) => {
+    // const newHistory: HistoryEntry[] = history.slice(0, step + 1);
+    // setHistory([...newHistory]);
+    _setStep(_step);
+  }
 
   const setBoard = (state: BoardState, value: Cell) => {
     setFocusValue(value);
@@ -165,17 +179,31 @@ const SudokuGame = () => {
       return;
     }
 
+
     const _board = insertVal(focusIndex, val, board);
+    const newHistory: HistoryEntry[] = history.slice(0, step + 1);
+    setHistory([...history, { boardState: _board, index: focusIndex }]);
+    setStep(newHistory.length);
     setBoard(_board, val);
   };
+
+  const undoMove = () => {
+    if (step > 0) {
+        setStep(step - 1);
+        console.log(step, history);
+        setBoard(history[step - 1].boardState, null);
+        setFocusIndex(history[step - 1].index)
+        const newHistory: HistoryEntry[] = history.slice(0, step);
+        setHistory(newHistory);
+
+    }
+  }
 
   const keypad: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
   return (
     <div className="flex flex-col items-center justify-center p-20">
       <div className="flex flex-col items-center justify-center space-y-4">
-
-      
         <div className="flex flex-row w-full justify-center items-center space-x-1">
           <h1 className="text-blue-900 p-2">Difficulty:</h1>
           <button
@@ -234,36 +262,44 @@ const SudokuGame = () => {
           permanent={permanent}
         />
 
-            <div className="w-[272pt] space-x-12 justify-center flex flex-row">
-                <div className="flex flex-col space-y-2 items-center">
-                    <button>
-                    <RotateCcw
-                        size={48}
-                        className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
-                    />
-                    </button>
-                    {/* <h1 className="text-sm text-blue-900">Undo</h1> */}
-                </div>
+        <div className="w-[272pt] space-x-12 justify-center flex flex-row">
+          <div className="flex flex-col space-y-2 items-center">
+            <button
+                onClick={() => {
+                    undoMove();
+                }}
+            >
+              <RotateCcw
+                size={48}
+                className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
+              />
+            </button>
+            {/* <h1 className="text-sm text-blue-900">Undo</h1> */}
+          </div>
 
-                <div className="flex flex-col space-y-2 items-center">
-                    <button>
-                    <Eraser
-                        size={48}
-                        className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
-                    />
-                    </button>
-                    {/* <h1 className="text-sm text-blue-900">Erase</h1> */}
-                </div>
-            </div>
+          <div className="flex flex-col space-y-2 items-center">
+            <button>
+              <Eraser
+                size={48}
+                className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
+              />
+            </button>
+            {/* <h1 className="text-sm text-blue-900">Erase</h1> */}
+          </div>
+        </div>
 
         <div className="flex flex-wrap items-center justify-center h-[225pt] w-[225pt]">
-          {keypad.map((value) => (
-            <button className="w-[65pt] h-[65pt] bg-white text-blue-300 mx-1 rounded-md hover:bg-blue-900 hover:text-white">
+          {keypad.map((value, index) => (
+            <button
+              key={index}
+              onClick={() => {}}
+              className="w-[65pt] h-[65pt] bg-white text-blue-300 mx-1 rounded-md hover:bg-blue-900 hover:text-white"
+            >
               <h1 className="">{value}</h1>
             </button>
           ))}
         </div>
-        </div>
+      </div>
     </div>
   );
 };

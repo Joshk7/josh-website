@@ -65,6 +65,7 @@ const Square = ({
           "bg-blue-200 border-2 border-blue-600 rounded-sm",
         permanentValue === null && "text-blue-400",
         !valid && "text-red-700",
+
       )}
       onClick={onPress}
       onKeyDown={handleKeyDown}

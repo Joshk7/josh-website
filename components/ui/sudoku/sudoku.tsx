@@ -21,7 +21,9 @@ const SudokuGame = () => {
     _setDifficultyLevel(difficulty);
     const _sudoku = getSudoku(difficulty);
     setSudoku(_sudoku);
-    setBoard([...boardArray(_sudoku.puzzle)], null);
+    const newBoard = boardArray(_sudoku.puzzle);
+    setBoard([...newBoard], null);
+    setHistory([{boardState: [...newBoard]}])
     setFocusIndex(undefined);
   };
 
@@ -34,13 +36,7 @@ const SudokuGame = () => {
   const [history, setHistory] = useState<HistoryEntry[]>([{boardState: initialBoard}]);
 
 
-  const [step, _setStep] = useState<number>(0);
-
-  const setStep = (_step: number) => {
-    // const newHistory: HistoryEntry[] = history.slice(0, step + 1);
-    // setHistory([...newHistory]);
-    _setStep(_step);
-  }
+  const [step, setStep] = useState<number>(0);
 
   const setBoard = (state: BoardState, value: Cell) => {
     setFocusValue(value);
@@ -187,7 +183,7 @@ const SudokuGame = () => {
     setBoard(_board, val);
   };
 
-  const undoMove = () => {
+  const handleUndoMove = () => {
     if (step > 0) {
         setStep(step - 1);
         console.log(step, history);
@@ -199,7 +195,36 @@ const SudokuGame = () => {
     }
   }
 
-  const keypad: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  const handleEraseMove = () => {
+    if (focusIndex === undefined || permanent[focusIndex] !== null) {
+        return;
+    }
+
+    const _board = insertVal(focusIndex, null, board);
+    const newHistory: HistoryEntry[] = history.slice(0, step + 1);
+    setHistory([...history, { boardState: _board, index: focusIndex }]);
+    setStep(newHistory.length);
+    setBoard(_board, null);
+
+  }
+
+//   0,1,2
+//   9,10,11
+//   17,18,19
+
+  const keypad: Cell[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+  const handleKeypad = (value: Cell) => {
+    if (focusIndex === undefined || permanent[focusIndex] !== null) {
+        return;
+    }
+
+    const _board = insertVal(focusIndex, value, board);
+    const newHistory: HistoryEntry[] = history.slice(0, step + 1);
+    setHistory([...history, { boardState: _board, index: focusIndex }]);
+    setStep(newHistory.length);
+    setBoard(_board, value);
+  }
 
   return (
     <div className="flex flex-col items-center justify-center p-20">
@@ -266,7 +291,7 @@ const SudokuGame = () => {
           <div className="flex flex-col space-y-2 items-center">
             <button
                 onClick={() => {
-                    undoMove();
+                    handleUndoMove();
                 }}
             >
               <RotateCcw
@@ -278,7 +303,11 @@ const SudokuGame = () => {
           </div>
 
           <div className="flex flex-col space-y-2 items-center">
-            <button>
+            <button
+                onClick={() => {
+                    handleEraseMove();
+                }}
+            >
               <Eraser
                 size={48}
                 className="bg-white text-blue-300 p-2 rounded-full hover:bg-blue-900 hover:text-white"
@@ -292,7 +321,7 @@ const SudokuGame = () => {
           {keypad.map((value, index) => (
             <button
               key={index}
-              onClick={() => {}}
+              onClick={() => handleKeypad(value)}
               className="w-[65pt] h-[65pt] bg-white text-blue-300 mx-1 rounded-md hover:bg-blue-900 hover:text-white"
             >
               <h1 className="">{value}</h1>

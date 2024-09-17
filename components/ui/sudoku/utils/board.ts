@@ -160,6 +160,11 @@ export const getBoxNumber = (index: number): number => {
 };
 
 export const validBoard = (state: BoardState): boolean => {
+  return false;
+};
 
-    return false;
-}
+export const checkCompletion = (state: BoardState, solved: BoardState) => {
+  return state.every((value, index) => {
+    return value === solved[index];
+  });
+};

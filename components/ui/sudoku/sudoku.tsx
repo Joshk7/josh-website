@@ -1,21 +1,21 @@
 import { getSudoku } from "sudoku-gen";
 import Board from "@/components/ui/sudoku/board";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { BoardState, Cell } from "@/components/ui/sudoku/utils/types";
 import { Sudoku } from "sudoku-gen/dist/types/sudoku.type";
-import { boardArray, getBoxNumber } from "./utils/board";
-import Keypad from "@/components/ui/sudoku/keypad";
+import { boardArray, checkCompletion } from "./utils/board";
 import { Difficulty } from "sudoku-gen/dist/types/difficulty.type";
 import { cn } from "@/lib/utils";
 import { Eraser, RotateCcw } from "lucide-react";
 
 interface HistoryEntry {
-    boardState: BoardState;
-    index?: number;
+  boardState: BoardState;
+  index?: number;
 }
 
 const SudokuGame = () => {
   const [difficultyLevel, _setDifficultyLevel] = useState<Difficulty>("easy");
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   const setDifficultyLevel = (difficulty: Difficulty) => {
     _setDifficultyLevel(difficulty);
@@ -23,7 +23,7 @@ const SudokuGame = () => {
     setSudoku(_sudoku);
     const newBoard = boardArray(_sudoku.puzzle);
     setBoard([...newBoard], null);
-    setHistory([{boardState: [...newBoard]}])
+    setHistory([{ boardState: [...newBoard] }]);
     setFocusIndex(undefined);
   };
 
@@ -33,12 +33,17 @@ const SudokuGame = () => {
 
   const initialBoard: BoardState = [...permanent];
   const [board, _setBoard] = useState<BoardState>(initialBoard);
-  const [history, setHistory] = useState<HistoryEntry[]>([{boardState: initialBoard}]);
-
+  const [history, setHistory] = useState<HistoryEntry[]>([
+    { boardState: initialBoard },
+  ]);
 
   const [step, setStep] = useState<number>(0);
 
   const setBoard = (state: BoardState, value: Cell) => {
+    
+    if (checkCompletion(state, solved)) {
+        setIsCompleted(true);
+    }
     setFocusValue(value);
     _setBoard(state);
   };
@@ -175,7 +180,6 @@ const SudokuGame = () => {
       return;
     }
 
-
     const _board = insertVal(focusIndex, val, board);
     const newHistory: HistoryEntry[] = history.slice(0, step + 1);
     setHistory([...history, { boardState: _board, index: focusIndex }]);
@@ -185,19 +189,18 @@ const SudokuGame = () => {
 
   const handleUndoMove = () => {
     if (step > 0) {
-        setStep(step - 1);
-        console.log(step, history);
-        setBoard(history[step - 1].boardState, null);
-        setFocusIndex(history[step - 1].index)
-        const newHistory: HistoryEntry[] = history.slice(0, step);
-        setHistory(newHistory);
-
+      setStep(step - 1);
+      console.log(step, history);
+      setBoard(history[step - 1].boardState, null);
+      setFocusIndex(history[step - 1].index);
+      const newHistory: HistoryEntry[] = history.slice(0, step);
+      setHistory(newHistory);
     }
-  }
+  };
 
   const handleEraseMove = () => {
     if (focusIndex === undefined || permanent[focusIndex] !== null) {
-        return;
+      return;
     }
 
     const _board = insertVal(focusIndex, null, board);
@@ -205,18 +208,17 @@ const SudokuGame = () => {
     setHistory([...history, { boardState: _board, index: focusIndex }]);
     setStep(newHistory.length);
     setBoard(_board, null);
+  };
 
-  }
-
-//   0,1,2
-//   9,10,11
-//   17,18,19
+  //   0,1,2
+  //   9,10,11
+  //   17,18,19
 
   const keypad: Cell[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
   const handleKeypad = (value: Cell) => {
     if (focusIndex === undefined || permanent[focusIndex] !== null) {
-        return;
+      return;
     }
 
     const _board = insertVal(focusIndex, value, board);
@@ -224,6 +226,11 @@ const SudokuGame = () => {
     setHistory([...history, { boardState: _board, index: focusIndex }]);
     setStep(newHistory.length);
     setBoard(_board, value);
+  };
+
+  const handleNewGame = () => {
+    setDifficultyLevel(difficultyLevel);
+    setIsCompleted(false);
   }
 
   return (
@@ -276,13 +283,14 @@ const SudokuGame = () => {
             Expert
           </button>
         </div>
-        {/* <Keypad /> */}
         <Board
+          completed={isCompleted}
           state={board}
           solved={solved}
           focusIndex={focusIndex}
           focusValue={focusValue}
           handleKeyDown={handleOnKeyDown}
+          handleNewGame={handleNewGame}
           onCellPressed={(cell) => handleOnCellPressed(cell)}
           permanent={permanent}
         />
@@ -290,9 +298,9 @@ const SudokuGame = () => {
         <div className="w-[272pt] space-x-12 justify-center flex flex-row">
           <div className="flex flex-col space-y-2 items-center">
             <button
-                onClick={() => {
-                    handleUndoMove();
-                }}
+              onClick={() => {
+                handleUndoMove();
+              }}
             >
               <RotateCcw
                 size={48}
@@ -304,9 +312,9 @@ const SudokuGame = () => {
 
           <div className="flex flex-col space-y-2 items-center">
             <button
-                onClick={() => {
-                    handleEraseMove();
-                }}
+              onClick={() => {
+                handleEraseMove();
+              }}
             >
               <Eraser
                 size={48}
@@ -317,14 +325,14 @@ const SudokuGame = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center h-[225pt] w-[225pt]">
+        <div className="flex flex-wrap items-center justify-center h-[160pt] w-[160pt]">
           {keypad.map((value, index) => (
             <button
               key={index}
               onClick={() => handleKeypad(value)}
-              className="w-[65pt] h-[65pt] bg-white text-blue-300 mx-1 rounded-md hover:bg-blue-900 hover:text-white"
+              className="w-[45pt] h-[45pt] bg-white text-blue-300 mx-1 rounded-md hover:bg-blue-900 hover:text-white"
             >
-              <h1 className="">{value}</h1>
+              <h1>{value}</h1>
             </button>
           ))}
         </div>

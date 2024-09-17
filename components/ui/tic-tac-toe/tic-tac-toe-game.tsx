@@ -6,7 +6,7 @@ import { isEmpty, isTerminal } from "./utils/board";
 import { BoardState, Cell } from "./utils/types";
 import { getBestMove } from "./utils/player";
 
-function Game() {
+function TicTacToeGame() {
   const [turn, _setTurn] = useState<"HUMAN" | "BOT">(
     Math.random() < 0.5 ? "HUMAN" : "BOT"
   );
@@ -42,7 +42,7 @@ function Game() {
     draws: 0,
   });
 
-  const [gameResult, setGameResult] = useState(isTerminal(squares));
+  const [gameResult, setGameResult] = useState<"BOT" | "HUMAN" | "DRAW" | undefined>();
 
   const determineWinner = (squaresState: BoardState) => {
     const gResult = isTerminal(squaresState);
@@ -51,13 +51,16 @@ function Game() {
     }
     const winner = getWinner(gResult.winner);
     if (winner === "HUMAN") {
+        setGameResult("HUMAN");
       setGamesCount({ ...gamesCount, wins: gamesCount.wins + 1 });
     }
     if (winner === "BOT") {
+        setGameResult("BOT");
       setGamesCount({ ...gamesCount, losses: gamesCount.losses + 1 });
     }
 
     if (winner === "DRAW") {
+        setGameResult("DRAW");
       setGamesCount({ ...gamesCount, draws: gamesCount.draws + 1 });
     }
   };
@@ -91,7 +94,7 @@ function Game() {
     }
   };
 
-  const  insertCell = (
+  const insertCell = (
     index: number,
     symbol: "x" | "o",
     curSquares: BoardState
@@ -179,11 +182,12 @@ function Game() {
     ];
     setSquares(newSquares);
     setTurn(Math.random() < 0.5 ? "HUMAN" : "BOT", newSquares);
+    setGameResult(undefined);
   };
 
   const winner = isTerminal(squares);
 
-  // console.log(isPossible);
+  console.log(gameResult);
 
   return (
     <div className="flex flex-col justify-center items-center p-20">
@@ -218,22 +222,12 @@ function Game() {
             handleOnSquarePressed(square);
           }}
           state={squares}
-          gameResult={gameResult}
+          winner={gameResult}
+          handleNewGame={reset}
         />
-      </div>
-      <div className="flex flex-col justify-center items-center w-full">
-        <div className="text-blue-900 font-bold text-center pt-4">
-          {gameResult ? getWinner(gameResult.winner) : null}
-        </div>
-        <button
-          className="text-white p-4 rounded-full bg-blue-900 font-bold text-lg text-center mb-4"
-          onClick={() => reset()}
-        >
-          New Game
-        </button>
       </div>
     </div>
   );
 }
 
-export default Game;
+export default TicTacToeGame;

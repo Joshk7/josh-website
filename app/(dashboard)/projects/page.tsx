@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-const Game = dynamic(() => import("../../../components/ui/tic-tac-toe/game"), {
+const TicTacToeGame = dynamic(() => import("../../../components/ui/tic-tac-toe/tic-tac-toe-game"), {
   ssr: false,
 });
 
@@ -13,7 +13,7 @@ const SudokuGame = dynamic(() => import("@/components/ui/sudoku/sudoku"), {
 const Projects = () => {
   return (
     <div className="w-full max-h-full relative">
-      <Game />
+      <TicTacToeGame />
       <SudokuGame />
     </div>
   );

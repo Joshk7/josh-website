@@ -12,7 +12,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const Resume = () => {
     const screenWidth = window.innerWidth;
 
-    const scale = screenWidth / 1000;
+    const scale = screenWidth / 800;
     
   return (
     <Document file="/JoshKahlbaughResume.pdf">

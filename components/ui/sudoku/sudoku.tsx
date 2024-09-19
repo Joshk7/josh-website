@@ -82,11 +82,7 @@ const SudokuGame = () => {
     event: React.KeyboardEvent<HTMLButtonElement>,
     index: number
   ) => {
-    if (permanent?.[index]) {
-      return;
-    }
     event.preventDefault();
-
     var val: Cell = null;
     switch (event?.key) {
       case "1": {
@@ -325,12 +321,12 @@ const SudokuGame = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center h-[160pt] w-[160pt]">
+        <div className="flex flex-wrap items-center space-x-4 justify-center">
           {keypad.map((value, index) => (
             <button
               key={index}
               onClick={() => handleKeypad(value)}
-              className="w-[45pt] h-[45pt] bg-white text-blue-300 mx-1 rounded-md hover:bg-blue-900 hover:text-white"
+              className="text-blue-300 rounded-md hover:text-blue-900 text-4xl"
             >
               <h1>{value}</h1>
             </button>

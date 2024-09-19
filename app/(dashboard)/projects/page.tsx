@@ -12,7 +12,7 @@ const SudokuGame = dynamic(() => import("@/components/ui/sudoku/sudoku"), {
 
 const Projects = () => {
   return (
-    <div className="w-full max-h-full relative">
+    <div className="w-full h-full relative">
       <TicTacToeGame />
       <SudokuGame />
     </div>

@@ -42,7 +42,7 @@ const MainNav = () => {
         </NavigationMenuItem>
 
         <NavigationMenuItem className="px-2 hidden lg:flex">
-          <Link href="hobbies" legacyBehavior passHref>
+          <Link href="about" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               About
             </NavigationMenuLink>
@@ -69,7 +69,7 @@ const MainNav = () => {
                 Projects
               </NavigationMenuLink>
             </Link>
-            <Link href="/hobbies" legacyBehavior passHref>
+            <Link href="/about" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 About
               </NavigationMenuLink>

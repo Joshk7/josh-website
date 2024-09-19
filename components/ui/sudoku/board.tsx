@@ -29,7 +29,7 @@ const Board = ({
   completed,
 }: BoardProps) => {
   return (
-    <div className="flex flex-row flex-wrap w-[272pt] h-[272pt] justify-center items-center">
+    <div className="flex flex-row flex-wrap w-[274pt] h-[274pt] border-2 border-blue-900 justify-center items-center">
       {state.map((cell, index) => {
         return (
           <Square

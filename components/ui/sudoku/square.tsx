@@ -62,7 +62,7 @@ const Square = ({
           "bg-red-200",
         focusIndex !== undefined &&
           focusIndex === index &&
-          "bg-blue-200 border-2 border-blue-600 rounded-sm",
+          "bg-blue-200",
         permanentValue === null && "text-blue-400",
         !valid && "text-red-700",
 

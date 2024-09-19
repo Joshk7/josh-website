@@ -16,7 +16,7 @@ const Resume = dynamic(() => import("../../../components/resume"), {
 const ResumePage = () => {
   return (
     <div className="w-full h-full relative justify-center items-center">
-      <div className="relative lg:top-16">
+      <div className="relative top-16">
         <div className="flex top-12 justify-center items-center">
           <HoverCard openDelay={50} closeDelay={200}>
             <HoverCardTrigger>

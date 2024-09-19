@@ -3,12 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const AboutMe = () => {
+const Home = () => {
   return (
-    <div className="w-full flex justify-center items-center">
-      <div className="flex flex-col md:flex-row justify-center items-center space-x-4 pt-20 p-4">
+    <div className="w-full relative justify-center items-center">
+      <div className="flex flex-col md:flex-row justify-center items-center space-x-4 p-4">
         <Image
-          src="/me3.jpg"
+          src="/me.jpg"
           alt="me"
           width={200}
           height={300}
@@ -58,4 +58,4 @@ const AboutMe = () => {
   );
 };
 
-export default AboutMe;
+export default Home;

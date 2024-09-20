@@ -15,7 +15,7 @@ const Hobbies = () => {
               height={200}
               className="rounded-sm w-[100px] xs:w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px]"
             />
-            <p className="text-xl hidden lg:block text-blue-900 max-w-[90%]">
+            <p className="text-xl hidden lg:block text-blue-900 max-w-[90%] p-4">
               Since I have the privilege of living next to Lake Superior, I get
               to spend time next to water and the beauty that it offers. The
               picture on the left was taken at Brighton Beach on the North Shore
@@ -51,7 +51,7 @@ const Hobbies = () => {
               height={200}
               className="rounded-sm w-[100px] xs:w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px]"
             />
-            <p className="text-xl hidden lg:block text-blue-900 max-w-[90%]">
+            <p className="text-xl hidden lg:block text-blue-900 max-w-[90%] p-4">
               Alongside spending time near the lake, Fishing and working out are
               some of my hobbies. I'm a firm believer that health is wealth and
               staying healthy is rewarding both mentally and physically. I enjoy

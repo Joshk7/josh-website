@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const Home = () => {
   return (
-    <div className="w-full relative justify-center items-center">
-      <div className="flex flex-col md:flex-row justify-center items-center space-x-4 p-4">
+    <div className="w-full h-full relative">
+      <div className="w-full h-full flex flex-col md:flex-row items-center space-x-4 p-4 m-auto">
         <Image
           src="/me.jpg"
           alt="me"

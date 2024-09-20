@@ -230,7 +230,7 @@ const SudokuGame = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-20">
+    <div className="flex flex-col items-center justify-center px-32 py-12">
       <div className="flex flex-col items-center justify-center space-y-4">
         <div className="flex flex-row w-full justify-center items-center space-x-1">
           <h1 className="text-blue-900 p-2">Difficulty:</h1>

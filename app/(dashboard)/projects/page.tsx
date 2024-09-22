@@ -17,27 +17,31 @@ const Projects = () => {
   return (
     <div className="w-full h-full relative">
       <div className="w-full h-full flex flex-col items-center m-auto">
-        <div className="flex items-center">
-          <div className="flex flex-col items-center">
-            <h1 className="text-xl">Tic Tac Toe</h1>
-            <p className="p-20">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-              necessitatibus suscipit, iure, quae praesentium perspiciatis,
-              expedita nam distinctio natus totam nisi fugiat quasi sed. Nisi
-              assumenda dicta beatae sed quibusdam!
+        <div className="flex flex-col items-center lg:flex-row lg:items-center">
+          <div className="flex flex-col items-center w-64 md:w-80 lg:w-full">
+            <h1 className="text-2xl py-8 text-blue-900 font-bold">Tic Tac Toe</h1>
+            <p className="lg:px-20 text-blue-400">
+              Try winning a tic tac toe game against the computer on impossible
+              difficulty! You'll find that the computer is unbeatable because it
+              relies on an algorithm to get the best possible move to make
+              against you. The minimax algorithm it uses works by recursively
+              going through every possible move that could be taken by either
+              player until it reaches an end state which returns a score based
+              on whether the state is a win, loss, or draw.
             </p>
           </div>
           <TicTacToeGame />
         </div>
-        <div className="flex items-center">
+        <div className="flex flex-col-reverse items-center lg:flex-row lg:items-center">
           <SudokuGame />
-          <div className="flex flex-col items-center">
-            <h1 className="text-xl">Sudoku</h1>
-            <p className="p-20">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. A
-              molestiae ad quisquam, officia praesentium corrupti dolor eos
-              repudiandae debitis dolorum recusandae labore omnis aliquam culpa
-              quas reiciendis quia neque odio!
+          <div className="flex flex-col mb-10 items-center w-64 md:w-80 lg:w-full">
+            <h1 className="text-2xl py-8 text-blue-900 font-bold">Sudoku</h1>
+            <p className="lg:px-20 text-blue-400">
+              Sudoku is another fun game, however, there is no fancy algorithm
+              to make this one work. I simply downloaded an sudoku generator
+              from npm and integrated it into this website. This project was
+              more helpful for me to learn how to set board states, style the
+              board, and pass properties to children components in react.
             </p>
           </div>
         </div>

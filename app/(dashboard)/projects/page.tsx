@@ -17,7 +17,7 @@ const Projects = () => {
   return (
     <div className="w-full h-full relative">
       <div className="w-full h-full flex flex-col items-center m-auto">
-        <div className="flex flex-col items-center lg:flex-row lg:items-center">
+        <div className="flex flex-col items-center mt-4 lg:flex-row lg:items-center">
           <div className="flex flex-col items-center w-64 md:w-80 lg:w-full">
             <h1 className="text-2xl py-8 text-blue-900 font-bold">Tic Tac Toe</h1>
             <p className="lg:px-20 text-blue-400">
@@ -34,7 +34,7 @@ const Projects = () => {
         </div>
         <div className="flex flex-col-reverse items-center lg:flex-row lg:items-center">
           <SudokuGame />
-          <div className="flex flex-col mb-10 items-center w-64 md:w-80 lg:w-full">
+          <div className="flex flex-col items-center w-64 md:w-80 lg:w-full">
             <h1 className="text-2xl py-8 text-blue-900 font-bold">Sudoku</h1>
             <p className="lg:px-20 text-blue-400">
               Sudoku is another fun game, however, there is no fancy algorithm

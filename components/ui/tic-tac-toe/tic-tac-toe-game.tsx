@@ -190,7 +190,7 @@ function TicTacToeGame() {
   console.log(gameResult);
 
   return (
-    <div className="flex flex-col justify-center items-center px-40 py-12">
+    <div className="flex flex-col justify-center items-center px-40 pt-8 pb-4">
       <div className="flex flex-col items-center">
         <button
           onClick={() => {

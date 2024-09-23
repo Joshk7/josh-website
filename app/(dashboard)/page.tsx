@@ -16,14 +16,14 @@ const Home = () => {
         />
         <div className="flex flex-col justify-center items-center">
           <h1 className="p-8 text-4xl font-bold text-blue-900">
-            My name is Joshua Kahlbaugh and this is my website!
+            Welcome to my website!
           </h1>
           <p className="px-10 text-blue-950 text-lg">
             I recently graduated Summa Cum Laude from the University of St
             Thomas, in St Paul, MN, with a Bachelor's of Science degree in
             Computer Science and an additional Minor in Data Science. I have
             previous experience working as an Intern at SecretLab, LLC and on
-            class projects similar to this website for Senior Capstone. I've
+            class projects similar to this website for a Senior Capstone project. I've
             always had a passion for solving problems and have recently been
             exploring{" "}
             <a
@@ -42,15 +42,6 @@ const Home = () => {
               GitHub
             </a>{" "}
             to look at more projects that I've worked on!
-          </p>
-
-          <p className="p-10 text-blue-950 text-lg">
-            Aside from technical skills, I'm a great team player and can
-            effectively communicate within a group to resolve problems.
-            Additionally, I've developed discipline from my hobby of working out
-            which carries over to working on projects through the idea of always
-            finding ways to make a project better no matter how small the
-            improvement.
           </p>
         </div>
       </div>

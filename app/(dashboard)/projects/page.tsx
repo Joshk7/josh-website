@@ -30,13 +30,13 @@ const Projects = () => {
               on whether the state is a win, loss, or draw.
             </p>
           </div>
-          <div className="flex flex-col justify-center items-center px-40 py-4">
+          <div className="flex flex-col h-[350pt] justify-center items-center px-40 py-4">
             <TicTacToeGame />
           </div>
         </div>
         <hr className="bg-blue-900 w-11/12 h-4 p-1 m-8 rounded-full" />
         <div className="flex flex-col items-center my-4 py-4 lg:flex-row lg:items-center">
-            <div className="flex flex-col justify-center items-center px-40 py-4">
+            <div className="flex flex-col h-[450pt] justify-center items-center px-40 py-4">
                 <SudokuGame />
             </div>
           <div className="flex flex-col items-center w-64 md:w-80 lg:w-full">

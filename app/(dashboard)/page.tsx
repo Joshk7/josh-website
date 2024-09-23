@@ -15,7 +15,7 @@ const Home = () => {
           className="rounded-sm md:w-[300px]"
         />
         <div className="flex flex-col justify-center items-center">
-          <h1 className="p-8 text-4xl font-bold text-blue-900">
+          <h1 className="p-8 text-4xl text-center font-bold text-blue-900">
             Welcome to my website!
           </h1>
           <p className="px-10 text-blue-950 text-lg">
@@ -23,9 +23,9 @@ const Home = () => {
             Thomas, in St Paul, MN, with a Bachelor's of Science degree in
             Computer Science and an additional Minor in Data Science. I have
             previous experience working as an Intern at SecretLab, LLC and on
-            class projects similar to this website for a Senior Capstone project. I've
-            always had a passion for solving problems and have recently been
-            exploring{" "}
+            class projects similar to this website for a Senior Capstone
+            project. I've always had a passion for solving problems and have
+            recently been exploring{" "}
             <a
               href="https://leetcode.com/u/JoshK7"
               className="text-blue-500 hover:text-blue-700 underline font-semibold"

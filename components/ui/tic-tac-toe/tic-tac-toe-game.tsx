@@ -12,7 +12,6 @@ function TicTacToeGame() {
   );
 
   const setTurn = (_turn: "HUMAN" | "BOT", _squares: BoardState) => {
-    // console.log(_turn);
     _setTurn(_turn);
     playGame(_turn, _squares);
   };
@@ -185,12 +184,8 @@ function TicTacToeGame() {
     setGameResult(undefined);
   };
 
-  const winner = isTerminal(squares);
-
-  console.log(gameResult);
-
   return (
-    <div className="flex flex-col justify-center items-center px-40 pt-8 pb-4">
+    <div>
       <div className="flex flex-col items-center">
         <button
           onClick={() => {

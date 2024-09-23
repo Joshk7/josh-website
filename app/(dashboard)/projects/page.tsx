@@ -17,7 +17,7 @@ const Projects = () => {
   return (
     <div className="w-full h-full relative">
       <div className="w-full h-full flex flex-col items-center m-auto">
-        <div className="flex flex-col items-center mt-4 lg:flex-row lg:items-center">
+        <div className="flex flex-col-reverse items-center mt-4 lg:flex-row lg:items-center">
           <div className="flex flex-col items-center w-64 md:w-80 lg:w-full">
             <h1 className="text-2xl py-8 text-blue-900 font-bold">Tic Tac Toe</h1>
             <p className="lg:px-20 text-blue-400">
@@ -30,18 +30,23 @@ const Projects = () => {
               on whether the state is a win, loss, or draw.
             </p>
           </div>
-          <TicTacToeGame />
+          <div className="flex flex-col justify-center items-center px-40 py-4">
+            <TicTacToeGame />
+          </div>
         </div>
-        <div className="flex flex-col-reverse items-center lg:flex-row lg:items-center">
-          <SudokuGame />
+        <hr className="bg-blue-900 w-11/12 h-4 p-1 m-8 rounded-full" />
+        <div className="flex flex-col items-center my-4 py-4 lg:flex-row lg:items-center">
+            <div className="flex flex-col justify-center items-center px-40 py-4">
+                <SudokuGame />
+            </div>
           <div className="flex flex-col items-center w-64 md:w-80 lg:w-full">
             <h1 className="text-2xl py-8 text-blue-900 font-bold">Sudoku</h1>
             <p className="lg:px-20 text-blue-400">
               Sudoku is another fun game, however, there is no fancy algorithm
-              to make this one work. I simply downloaded an sudoku generator
+              to make this one work. I downloaded a sudoku generator
               from npm and integrated it into this website. This project was
               more helpful for me to learn how to set board states, style the
-              board, and pass properties to children components in react.
+              board, and pass properties to components in react.
             </p>
           </div>
         </div>

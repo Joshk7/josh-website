@@ -11,7 +11,6 @@ export const printFormattedBoard = (state: BoardState): void => {
             }
         }
     });
-    // console.log(formattedString);
 }
 
 export const isEmpty = (state: BoardState): boolean => {

@@ -5,11 +5,11 @@ const nextConfig = {
 
   //     return config;
   //   },
-//   output: "export",
-//   swcMinify: false,
-//   images: {
-//     unoptimized: true,
-//   }
+  output: "export",
+  swcMinify: false,
+  images: {
+    unoptimized: true,
+  }
 };
 
 export default nextConfig;
